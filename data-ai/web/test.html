@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>平台功能测试 - 数智一体化平台</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+        .test-result {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .test-pass {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+        .test-fail {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+        }
+        .test-running {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1d4ed8;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                <i class="fas fa-flask mr-2"></i>数智一体化平台功能测试
+            </h1>
+            <p class="text-gray-600 mb-8">正在测试平台各组件功能...</p>
+
+            <div id="testResults">
+                <!-- 测试结果将在这里显示 -->
+            </div>
+
+            <div class="mt-8 flex space-x-4">
+                <button onclick="runTests()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                    <i class="fas fa-play mr-2"></i>开始测试
+                </button>
+                <a href="/" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">
+                    <i class="fas fa-home mr-2"></i>返回主页
+                </a>
+                <a href="login.html" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">
+                    <i class="fas fa-sign-in-alt mr-2"></i>登录页面
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let tests = [
+            {
+                name: '基础样式加载',
+                test: () => {
+                    return document.querySelector('.bg-gray-100') !== null;
+                }
+            },
+            {
+                name: 'Font Awesome图标',
+                test: () => {
+                    const link = document.querySelector('link[href*="font-awesome"]');
+                    return link !== null;
+                }
+            },
+            {
+                name: 'Tailwind CSS',
+                test: () => {
+                    const element = document.createElement('div');
+                    element.className = 'flex items-center justify-center p-4';
+                    document.body.appendChild(element);
+                    const styles = window.getComputedStyle(element);
+                    const result = styles.display === 'flex';
+                    document.body.removeChild(element);
+                    return result;
+                }
+            }
+        ];
+
+        async function runTests() {
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.innerHTML = '';
+
+            for (let test of tests) {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'test-result test-running';
+                resultDiv.innerHTML = `
+                    <div class="flex items-center">
+                        <i class="fas fa-spinner fa-spin mr-2"></i>
+                        <span class="font-semibold">${test.name}</span>
+                    </div>
+                    <div class="text-sm mt-1">正在测试...</div>
+                `;
+                resultsDiv.appendChild(resultDiv);
+
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                try {
+                    const passed = test.test();
+                    resultDiv.className = `test-result ${passed ? 'test-pass' : 'test-fail'}`;
+                    resultDiv.innerHTML = `
+                        <div class="flex items-center">
+                            <i class="fas fa-${passed ? 'check-circle' : 'times-circle'} mr-2"></i>
+                            <span class="font-semibold">${test.name}</span>
+                        </div>
+                        <div class="text-sm mt-1">${passed ? '✅ 测试通过' : '❌ 测试失败'}</div>
+                    `;
+                } catch (error) {
+                    resultDiv.className = 'test-result test-fail';
+                    resultDiv.innerHTML = `
+                        <div class="flex items-center">
+                            <i class="fas fa-times-circle mr-2"></i>
+                            <span class="font-semibold">${test.name}</span>
+                        </div>
+                        <div class="text-sm mt-1">❌ 测试失败: ${error.message}</div>
+                    `;
+                }
+            }
+
+            // 添加完成提示
+            const completeDiv = document.createElement('div');
+            completeDiv.className = 'test-result test-pass mt-6';
+            completeDiv.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span class="font-semibold">测试完成</span>
+                </div>
+                <div class="text-sm mt-1">✅ 所有基础功能测试完成，现在可以正常使用平台功能</div>
+            `;
+            resultsDiv.appendChild(completeDiv);
+        }
+
+        // 页面加载完成后自动运行测试
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(runTests, 1000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "platform_name": "数智一体化平台",
+  "version": "1.0.0",
+  "demo_time": "2025-12-17T18:59:32.989158",
+  "data_sources_count": 5,
+  "datasets_count": 3,
+  "etl_workflows_count": 3,
+  "models_count": 3,
+  "summary": "数智一体化平台演示成功完成"
+}

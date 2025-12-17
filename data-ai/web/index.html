@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数智一体化平台</title>
+    <meta name="description" content="数智一体化平台 - 企业级数据中台、AI平台和智能体平台">
+    <meta name="keywords" content="数据中台,AI平台,智能体,数据分析,机器学习,ETL,数据可视化">
+    <meta name="author" content="数智一体化平台">
+    <meta name="theme-color" content="#667eea">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="数智一体化平台">
+    <meta property="og:description" content="企业级数据中台、AI平台和智能体平台">
+    <meta property="og:type" content="website">
+
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="数智一体化平台">
+    <meta name="application-name" content="数智一体化平台">
+    <meta name="msapplication-TileColor" content="#667eea">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23667eea' width='100' height='100'/><text x='50' y='50' text-anchor='middle' dy='.3em' fill='white' font-family='Arial' font-size='80'>📊</text></svg>">
+
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="mobile.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Base Styles -->
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #48bb78;
+            --warning-color: #f6ad55;
+            --danger-color: #f56565;
+            --info-color: #4299e1;
+            --dark-color: #2d3748;
+            --light-color: #f7fafc;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            transition: transform 0.3s ease;
+        }
+
+        .content-area {
+            transition: margin-left 0.3s ease;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .status-online {
+            animation: pulse 2s infinite;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- 侧边栏 -->
+    <div id="sidebar" class="sidebar fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-30 transform -translate-x-full lg:translate-x-0">
+        <div class="gradient-bg p-6">
+            <h1 class="text-2xl font-bold text-white">
+                <i class="fas fa-chart-line mr-2"></i>数智一体化平台
+            </h1>
+            <p class="text-purple-100 text-sm mt-2">Data & AI Integration Platform</p>
+        </div>
+
+        <nav class="mt-8">
+            <div class="px-4">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">数据管理</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" onclick="showPage('data-sources')" class="nav-item flex items-center p-3 rounded-lg hover:bg-purple-50 text-gray-700">
+                            <i class="fas fa-database mr-3 text-purple-600"></i>
+                            数据源管理
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="showPage('datasets')" class="nav-item flex items-center p-3 rounded-lg hover:bg-purple-50 text-gray-700">
+                            <i class="fas fa-dataset mr-3 text-purple-600"></i>
+                            数据集管理
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="showPage('etl')" class="nav-item flex items-center p-3 rounded-lg hover:bg-purple-50 text-gray-700">
+                            <i class="fas fa-project-diagram mr-3 text-purple-600"></i>
+                            可视化ETL
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="px-4 mt-8">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">AI智能</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" onclick="showPage('models')" class="nav-item flex items-center p-3 rounded-lg hover:bg-purple-50 text-gray-700">
+                            <i class="fas fa-brain mr-3 text-purple-600"></i>
+                            模型管理
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="showPage('agents')" class="nav-item flex items-center p-3 rounded-lg hover:bg-purple-50 text-gray-700">
+                            <i class="fas fa-robot mr-3 text-purple-600"></i>
+                            智能体平台
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="px-4 mt-8">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">监控运维</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" onclick="showPage('dashboard')" class="nav-item flex items-center p-3 rounded-lg hover:bg-purple-50 text-gray-700">
+                            <i class="fas fa-tachometer-alt mr-3 text-purple-600"></i>
+                            数据可视化
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="showPage('monitoring')" class="nav-item flex items-center p-3 rounded-lg hover:bg-purple-50 text-gray-700">
+                            <i class="fas fa-heartbeat mr-3 text-purple-600"></i>
+                            系统监控
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="content-area lg:ml-64">
+        <!-- 顶部导航栏 -->
+        <nav class="bg-white shadow-sm border-b border-gray-200">
+            <div class="px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <button onclick="toggleSidebar()" class="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-500">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <div class="ml-4 flex items-center">
+                            <span id="currentPageTitle" class="text-xl font-semibold text-gray-800">平台概览</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-2 text-sm text-gray-600">
+                            <span class="status-online inline-block w-2 h-2 bg-green-500 rounded-full"></span>
+                            <span>系统正常</span>
+                        </div>
+                        <div class="relative">
+                            <button class="p-2 text-gray-400 hover:text-gray-500">
+                                <i class="fas fa-bell text-xl"></i>
+                            </button>
+                            <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500"></span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <img src="https://ui-avatars.com/api/?name=Admin&background=667eea&color=fff" alt="用户" class="w-8 h-8 rounded-full">
+                            <span class="text-gray-700">管理员</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 页面内容 -->
+        <div id="content" class="p-6">
+            <!-- 动态内容将在这里加载 -->
+        </div>
+    </div>
+
+    <!-- 加载组件 -->
+    <script src="components/theme.js"></script>
+    <script src="components/auth.js"></script>
+    <script src="components/notifications.js"></script>
+    <script src="components/charts.js"></script>
+    <script src="components/dataSourceManager.js"></script>
+    <link rel="stylesheet" href="css/dataSource.css">
+
+    <!-- 主应用 -->
+    <script src="app.js"></script>
+
+    <!-- 底部导航（移动端） -->
+    <nav class="bottom-nav lg:hidden" id="bottomNav">
+        <a href="#" onclick="showPage('dashboard')" class="bottom-nav-item">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>概览</span>
+        </a>
+        <a href="#" onclick="showPage('data-sources')" class="bottom-nav-item">
+            <i class="fas fa-database"></i>
+            <span>数据源</span>
+        </a>
+        <a href="#" onclick="showPage('models')" class="bottom-nav-item">
+            <i class="fas fa-brain"></i>
+            <span>AI模型</span>
+        </a>
+        <a href="#" onclick="showPage('agents')" class="bottom-nav-item">
+            <i class="fas fa-robot"></i>
+            <span>智能体</span>
+        </a>
+    </nav>
+
+    <!-- PWA 安装提示 -->
+    <div id="installPrompt" class="fixed bottom-20 right-4 bg-white rounded-lg shadow-lg p-4 hidden max-w-xs">
+        <div class="flex items-center mb-2">
+            <i class="fas fa-download text-blue-600 mr-2"></i>
+            <span class="font-semibold">安装应用</span>
+        </div>
+        <p class="text-sm text-gray-600 mb-3">将数智一体化平台添加到主屏幕</p>
+        <div class="flex space-x-2">
+            <button onclick="installApp()" class="flex-1 bg-blue-600 text-white px-3 py-1 rounded text-sm">
+                安装
+            </button>
+            <button onclick="dismissInstallPrompt()" class="flex-1 bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm">
+                稍后
+            </button>
+        </div>
+    </div>
+</body>
+</html>

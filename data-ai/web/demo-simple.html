@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数智一体化平台 - 快速演示</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .demo-section {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .feature-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 导航栏 -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-chart-line text-2xl"></i>
+                    <h1 class="text-xl font-bold">数智一体化平台</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="showNotification('success', '欢迎使用数智一体化平台!')" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg">
+                        <i class="fas fa-bell mr-2"></i>通知测试
+                    </button>
+                    <button onclick="toggleTheme()" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- 平台概述 -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">企业级数据智能解决方案</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                集数据中台、AI平台、智能体平台于一体的综合性数据智能平台，
+                助力企业实现数字化转型和智能化升级。
+            </p>
+        </div>
+
+        <!-- 核心功能展示 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <div class="feature-card bg-white p-6 rounded-lg" onclick="showFeatureDemo('data-sources')">
+                <div class="text-blue-600 text-3xl mb-4">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">数据源管理</h3>
+                <p class="text-gray-600">支持MySQL、MongoDB、Kafka等30+种数据源接入</p>
+                <div class="mt-4 text-sm text-blue-600">
+                    <i class="fas fa-arrow-right"></i> 点击查看详情
+                </div>
+            </div>
+
+            <div class="feature-card bg-white p-6 rounded-lg" onclick="showFeatureDemo('etl')">
+                <div class="text-purple-600 text-3xl mb-4">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">可视化ETL</h3>
+                <p class="text-gray-600">拖拽式工作流设计，实时数据处理和监控</p>
+                <div class="mt-4 text-sm text-purple-600">
+                    <i class="fas fa-arrow-right"></i> 点击查看详情
+                </div>
+            </div>
+
+            <div class="feature-card bg-white p-6 rounded-lg" onclick="showFeatureDemo('ai')">
+                <div class="text-green-600 text-3xl mb-4">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">AI建模平台</h3>
+                <p class="text-gray-600">端到端机器学习流程，AutoML自动化建模</p>
+                <div class="mt-4 text-sm text-green-600">
+                    <i class="fas fa-arrow-right"></i> 点击查看详情
+                </div>
+            </div>
+
+            <div class="feature-card bg-white p-6 rounded-lg" onclick="showFeatureDemo('agents')">
+                <div class="text-orange-600 text-3xl mb-4">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">智能体平台</h3>
+                <p class="text-gray-600">多Agent协作，工作流编排，知识库管理</p>
+                <div class="mt-4 text-sm text-orange-600">
+                    <i class="fas fa-arrow-right"></i> 点击查看详情
+                </div>
+            </div>
+
+            <div class="feature-card bg-white p-6 rounded-lg" onclick="showFeatureDemo('visualization')">
+                <div class="text-red-600 text-3xl mb-4">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">数据可视化</h3>
+                <p class="text-gray-600">交互式图表，大屏展示，实时仪表板</p>
+                <div class="mt-4 text-sm text-red-600">
+                    <i class="fas fa-arrow-right"></i> 点击查看详情
+                </div>
+            </div>
+
+            <div class="feature-card bg-white p-6 rounded-lg" onclick="showFeatureDemo('security')">
+                <div class="text-indigo-600 text-3xl mb-4">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">数据安全</h3>
+                <p class="text-gray-600">权限管理，数据加密，审计日志，合规保障</p>
+                <div class="mt-4 text-sm text-indigo-600">
+                    <i class="fas fa-arrow-right"></i> 点击查看详情
+                </div>
+            </div>
+        </div>
+
+        <!-- 实时数据展示 -->
+        <div class="demo-section">
+            <h3 class="text-2xl font-bold mb-6">
+                <i class="fas fa-tachometer-alt mr-2"></i>实时数据监控
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-4 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-blue-100">数据源</p>
+                            <p class="text-2xl font-bold">15</p>
+                        </div>
+                        <i class="fas fa-database text-3xl opacity-50"></i>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-4 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-green-100">数据集</p>
+                            <p class="text-2xl font-bold">248</p>
+                        </div>
+                        <i class="fas fa-dataset text-3xl opacity-50"></i>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-4 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-purple-100">AI模型</p>
+                            <p class="text-2xl font-bold">12</p>
+                        </div>
+                        <i class="fas fa-brain text-3xl opacity-50"></i>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-4 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-orange-100">智能体</p>
+                            <p class="text-2xl font-bold">8</p>
+                        </div>
+                        <i class="fas fa-robot text-3xl opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图表展示 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-4">数据处理趋势</h4>
+                    <canvas id="trendChart" width="400" height="200"></canvas>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-4">任务分布</h4>
+                    <canvas id="pieChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- 登录演示 -->
+        <div class="demo-section">
+            <h3 class="text-2xl font-bold mb-6">
+                <i class="fas fa-sign-in-alt mr-2"></i>快速登录演示
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <button onclick="quickLogin('admin')" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-lg hover:shadow-lg">
+                    <div class="text-center">
+                        <i class="fas fa-user-shield text-2xl mb-2"></i>
+                        <p class="font-semibold">系统管理员</p>
+                        <p class="text-sm opacity-80">admin / admin123</p>
+                    </div>
+                </button>
+                <button onclick="quickLogin('analyst')" class="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-lg hover:shadow-lg">
+                    <div class="text-center">
+                        <i class="fas fa-chart-bar text-2xl mb-2"></i>
+                        <p class="font-semibold">数据分析师</p>
+                        <p class="text-sm opacity-80">analyst / analyst123</p>
+                    </div>
+                </button>
+                <button onclick="quickLogin('developer')" class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-4 rounded-lg hover:shadow-lg">
+                    <div class="text-center">
+                        <i class="fas fa-code text-2xl mb-2"></i>
+                        <p class="font-semibold">开发工程师</p>
+                        <p class="text-sm opacity-80">developer / dev123</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- 实时日志 -->
+        <div class="demo-section">
+            <h3 class="text-2xl font-bold mb-6">
+                <i class="fas fa-stream mr-2"></i>实时系统日志
+            </h3>
+            <div id="logContainer" class="bg-black text-green-400 p-4 rounded-lg font-mono text-sm h-64 overflow-y-auto">
+                <!-- 日志内容将在这里显示 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 通知容器 -->
+    <div id="notificationContainer" class="fixed top-4 right-4 z-50"></div>
+
+    <script>
+        // 初始化变量
+        let isDarkTheme = false;
+        let logCount = 0;
+
+        // 初始化图表
+        function initCharts() {
+            // 趋势图
+            const trendCtx = document.getElementById('trendChart').getContext('2d');
+            new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+                    datasets: [{
+                        label: '数据处理量 (TB)',
+                        data: [1.2, 1.8, 2.1, 2.5, 2.3, 2.8],
+                        borderColor: 'rgb(59, 130, 246)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    }
+                }
+            });
+
+            // 饼图
+            const pieCtx = document.getElementById('pieChart').getContext('2d');
+            new Chart(pieCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['数据采集', '数据清洗', '模型训练', '数据分析', '报告生成'],
+                    datasets: [{
+                        data: [25, 20, 15, 30, 10],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(34, 197, 94, 0.8)',
+                            'rgba(168, 85, 247, 0.8)',
+                            'rgba(251, 146, 60, 0.8)',
+                            'rgba(239, 68, 68, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+        }
+
+        // 主题切换
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            const html = document.documentElement;
+            const icon = document.getElementById('themeIcon');
+
+            if (isDarkTheme) {
+                html.setAttribute('data-theme', 'dark');
+                icon.className = 'fas fa-sun';
+                showNotification('info', '已切换到深色主题');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                icon.className = 'fas fa-moon';
+                showNotification('info', '已切换到浅色主题');
+            }
+        }
+
+        // 显示通知
+        function showNotification(type, message) {
+            const container = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+
+            const bgColor = {
+                success: 'bg-green-500',
+                error: 'bg-red-500',
+                warning: 'bg-yellow-500',
+                info: 'bg-blue-500'
+            }[type] || 'bg-gray-500';
+
+            const icon = {
+                success: 'fa-check-circle',
+                error: 'fa-times-circle',
+                warning: 'fa-exclamation-triangle',
+                info: 'fa-info-circle'
+            }[type] || 'fa-info-circle';
+
+            notification.className = `${bgColor} text-white px-4 py-3 rounded-lg shadow-lg mb-2 flex items-center`;
+            notification.innerHTML = `
+                <i class="fas ${icon} mr-2"></i>
+                <span>${message}</span>
+            `;
+
+            container.appendChild(notification);
+
+            // 自动移除
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => container.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        // 显示功能演示
+        function showFeatureDemo(feature) {
+            const demos = {
+                'data-sources': '数据源管理支持MySQL、MongoDB、Redis、Kafka等30+种数据源，提供统一的数据接入和管理界面。',
+                'etl': '可视化ETL工具支持拖拽式工作流设计，提供50+个数据处理节点，支持实时和批处理模式。',
+                'ai': 'AI建模平台支持AutoML自动化建模，集成了TensorFlow、PyTorch等主流框架，提供模型版本管理和部署。',
+                'agents': '智能体平台支持多Agent协作，提供工作流编排和知识库管理，支持对话式交互。',
+                'visualization': '数据可视化提供丰富的图表组件，支持实时数据更新和大屏展示。',
+                'security': '数据安全提供完善的权限管理，支持数据加密和审计日志，确保数据安全合规。'
+            };
+
+            showNotification('info', demos[feature] || '功能演示');
+        }
+
+        // 快速登录
+        function quickLogin(role) {
+            const users = {
+                admin: { name: '系统管理员', password: 'admin123' },
+                analyst: { name: '数据分析师', password: 'analyst123' },
+                developer: { name: '开发工程师', password: 'dev123' }
+            };
+
+            const user = users[role];
+            showNotification('success', `正在以${user.name}身份登录... (${user.username}/${user.password})`);
+
+            // 模拟登录过程
+            setTimeout(() => {
+                showNotification('success', '登录成功！正在跳转到主页面...');
+            }, 1500);
+        }
+
+        // 添加日志
+        function addLog(type, message) {
+            const logContainer = document.getElementById('logContainer');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+
+            const typeColors = {
+                info: 'text-blue-400',
+                success: 'text-green-400',
+                warning: 'text-yellow-400',
+                error: 'text-red-400'
+            };
+
+            logEntry.className = typeColors[type] || 'text-gray-400';
+            logEntry.innerHTML = `[${timestamp}] ${message}`;
+
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+
+            // 限制日志数量
+            if (logContainer.children.length > 50) {
+                logContainer.removeChild(logContainer.firstChild);
+            }
+        }
+
+        // 模拟实时日志
+        function startRealTimeLogs() {
+            const logTypes = ['info', 'success', 'warning', 'error'];
+            const logMessages = [
+                '数据源连接成功',
+                'ETL任务开始执行',
+                '模型训练完成',
+                '数据质量检查通过',
+                'AI推理服务启动',
+                '用户登录成功',
+                '系统备份完成',
+                '监控告警触发',
+                '缓存更新完成',
+                'API请求处理完成'
+            ];
+
+            setInterval(() => {
+                const type = logTypes[Math.floor(Math.random() * logTypes.length)];
+                const message = logMessages[Math.floor(Math.random() * logMessages.length)];
+                addLog(type, message);
+            }, 3000);
+
+            // 初始日志
+            addLog('info', '数智一体化平台启动完成');
+            addLog('success', '所有服务启动成功');
+            addLog('info', '开始监听实时数据流');
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initCharts();
+            startRealTimeLogs();
+
+            // 显示欢迎通知
+            setTimeout(() => {
+                showNotification('success', '欢迎体验数智一体化平台！🚀');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

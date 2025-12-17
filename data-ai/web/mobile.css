@@ -1,0 +1,570 @@
+/* 移动端优化样式 */
+
+/* 基础移动端断点 */
+@media (max-width: 768px) {
+    /* 侧边栏优化 */
+    .sidebar {
+        width: 100%;
+        height: 100vh;
+        z-index: 50;
+    }
+
+    .sidebar.transform.-translate-x-full {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .content-area {
+        margin-left: 0 !important;
+    }
+
+    /* 导航栏优化 */
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.125rem;
+    }
+
+    .navbar-menu {
+        display: none;
+    }
+
+    .navbar-menu.show {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        z-index: 40;
+    }
+
+    /* 卡片优化 */
+    .card {
+        margin-bottom: 1rem;
+        border-radius: 8px;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    /* 按钮优化 */
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .btn-group .btn {
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+
+    .btn-group .btn:first-child {
+        border-top-left-radius: 0.375rem;
+        border-top-right-radius: 0.375rem;
+    }
+
+    .btn-group .btn:last-child {
+        border-bottom-left-radius: 0.375rem;
+        border-bottom-right-radius: 0.375rem;
+    }
+
+    /* 表格优化 */
+    .table {
+        font-size: 0.875rem;
+    }
+
+    .table th,
+    .table td {
+        padding: 0.5rem;
+    }
+
+    .table-responsive {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    /* 表单优化 */
+    .form-control {
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    /* 网格系统优化 */
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .grid-cols-2,
+    .grid-cols-3,
+    .grid-cols-4 {
+        grid-template-columns: 1fr;
+    }
+
+    /* 统计卡片优化 */
+    .stats-card {
+        margin-bottom: 1rem;
+    }
+
+    .stats-card .stats-number {
+        font-size: 1.5rem;
+    }
+
+    /* 图表容器优化 */
+    .chart-container {
+        height: 250px;
+    }
+
+    /* 模态框优化 */
+    .modal {
+        padding: 1rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+        margin: 1rem auto;
+    }
+
+    .modal-header {
+        padding: 1rem;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .modal-body {
+        padding: 1rem;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+
+    /* 通知优化 */
+    .notification {
+        right: 1rem;
+        left: 1rem;
+        max-width: none;
+        width: auto;
+    }
+
+    /* 标签页优化 */
+    .tab-list {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-item {
+        white-space: nowrap;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    /* 下拉菜单优化 */
+    .dropdown-content {
+        right: 0;
+        left: 0;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    /* 手势支持 */
+    .swipeable {
+        touch-action: pan-y;
+    }
+
+    /* 工具提示优化 */
+    .tooltip {
+        display: none;
+    }
+
+    /* 面包屑优化 */
+    .breadcrumb {
+        flex-wrap: wrap;
+    }
+
+    .breadcrumb-item {
+        margin-bottom: 0.25rem;
+    }
+
+    /* 搜索框优化 */
+    .search-box {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    /* 分页优化 */
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .pagination .page-item {
+        margin-bottom: 0.25rem;
+    }
+}
+
+/* 小屏幕手机优化 */
+@media (max-width: 480px) {
+    /* 容器优化 */
+    .container {
+        padding: 0.5rem;
+    }
+
+    /* 文字大小优化 */
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    h3 {
+        font-size: 1.125rem;
+    }
+
+    /* 按钮优化 */
+    .btn {
+        padding: 0.75rem;
+        font-size: 1rem;
+        min-height: 44px; /* 确保触摸区域足够大 */
+    }
+
+    .btn-sm {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+        min-height: 36px;
+    }
+
+    /* 输入框优化 */
+    .form-control {
+        padding: 0.75rem;
+        font-size: 1rem;
+        min-height: 44px;
+    }
+
+    /* 图标优化 */
+    .icon {
+        font-size: 1.125rem;
+    }
+
+    .icon-sm {
+        font-size: 1rem;
+    }
+
+    /* 卡片优化 */
+    .card {
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    /* 统计卡片 */
+    .stats-card {
+        padding: 0.75rem;
+    }
+
+    .stats-number {
+        font-size: 1.25rem;
+    }
+
+    /* 图表优化 */
+    .chart-container {
+        height: 200px;
+    }
+
+    /* 模态框 */
+    .modal-content {
+        padding: 0;
+    }
+
+    .modal-header {
+        padding: 1rem;
+    }
+
+    .modal-body {
+        padding: 1rem;
+    }
+
+    /* 导航菜单 */
+    .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .mobile-menu.show {
+        transform: translateX(0);
+    }
+
+    /* 列表优化 */
+    .list-group {
+        border: none;
+    }
+
+    .list-group-item {
+        padding: 1rem;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    /* 表格优化 */
+    .table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .table thead,
+    .table tbody,
+    .table th,
+    .table td,
+    .table tr {
+        display: table-cell;
+    }
+
+    /* 数据表格转卡片视图 */
+    .data-table-mobile {
+        display: none;
+    }
+
+    .table-mobile-card {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1rem;
+        background: white;
+    }
+
+    .table-mobile-card .field {
+        display: flex;
+        margin-bottom: 0.5rem;
+    }
+
+    .table-mobile-card .field:last-child {
+        margin-bottom: 0;
+    }
+
+    .table-mobile-card .label {
+        font-weight: 600;
+        min-width: 100px;
+        color: #6b7280;
+    }
+
+    .table-mobile-card .value {
+        flex: 1;
+        color: #1f2937;
+    }
+
+    /* 进度条优化 */
+    .progress {
+        height: 8px;
+    }
+
+    /* 骨架屏优化 */
+    .skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+        0% {
+            background-position: 200% 0;
+        }
+        100% {
+            background-position: -200% 0;
+        }
+    }
+
+    /* 底部导航 */
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 1px solid #e2e8f0;
+        padding: 0.5rem 0;
+        z-index: 40;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .bottom-nav-item {
+        flex: 1;
+        text-align: center;
+        padding: 0.5rem;
+        color: #6b7280;
+        text-decoration: none;
+        font-size: 0.75rem;
+    }
+
+    .bottom-nav-item.active {
+        color: #3b82f6;
+    }
+
+    .bottom-nav-item i {
+        display: block;
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+    }
+
+    /* 添加内容边距以避免底部导航遮挡 */
+    .content-with-bottom-nav {
+        padding-bottom: 60px;
+    }
+
+    /* 横向滚动优化 */
+    .horizontal-scroll {
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .horizontal-scroll::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
+    }
+
+    /* 卡片网格优化 */
+    .card-grid-mobile {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    /* 标签优化 */
+    .tag-mobile {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        background: #e5e7eb;
+        color: #374151;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        margin-right: 0.25rem;
+        margin-bottom: 0.25rem;
+    }
+}
+
+/* 横屏模式优化 */
+@media (max-width: 896px) and (orientation: landscape) {
+    .modal-content {
+        max-height: 90vh;
+        margin: 0.5rem auto;
+    }
+
+    .modal-body {
+        max-height: 70vh;
+    }
+
+    .bottom-nav {
+        padding: 0.25rem 0;
+    }
+
+    .bottom-nav-item {
+        padding: 0.25rem;
+        font-size: 0.625rem;
+    }
+
+    .bottom-nav-item i {
+        font-size: 1rem;
+        margin-bottom: 0.125rem;
+    }
+}
+
+/* iPad优化 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .sidebar {
+        width: 250px;
+    }
+
+    .content-area {
+        margin-left: 250px;
+    }
+
+    .grid-cols-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+    .btn:hover,
+    .card:hover,
+    .nav-item:hover {
+        transform: none;
+    }
+
+    .btn:active {
+        transform: scale(0.98);
+    }
+
+    /* 增大触摸区域 */
+    .clickable {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* 移除悬停效果 */
+    .dropdown:hover .dropdown-content,
+    .tooltip:hover .tooltip-content {
+        display: none;
+    }
+
+    /* 使用点击显示 */
+    .dropdown.active .dropdown-content {
+        display: block;
+    }
+}
+
+/* 可访问性优化 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* 高对比度模式优化 */
+@media (prefers-contrast: high) {
+    .card {
+        border: 2px solid #000;
+    }
+
+    .btn {
+        border: 2px solid #000;
+    }
+
+    .form-control {
+        border: 2px solid #000;
+    }
+}
